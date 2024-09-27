@@ -93,7 +93,7 @@ struct PercentageCalculatorMainView: View {
         }
         .padding()
         .background(Color(hex: "#EBEBEB"))
-        .edgesIgnoringSafeArea(.all) // Фон градиента на всю область
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

@@ -10,17 +10,15 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
-            // Добавляем градиентный фон
             Color(hex: "#EBEBEB")
-                .edgesIgnoringSafeArea(.all) // Применяем градиент на всю область экрана
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 TabView {
-                    // Оборачиваем каждый экран в ZStack
                     ZStack {
                         BasicCalculatorView()
                             .background(Color(hex: "#EBEBEB")
-                                    .edgesIgnoringSafeArea(.all) // Градиент для каждого экрана
+                                    .edgesIgnoringSafeArea(.all)
                             )
                     }
                     .tabItem {
@@ -30,7 +28,7 @@ struct ContentView: View {
                     ZStack {
                         PercentageCalculatorMainView()
                             .background(Color(hex: "#EBEBEB")
-                                    .edgesIgnoringSafeArea(.all) // Градиент для каждого экрана
+                                    .edgesIgnoringSafeArea(.all)
                             )
                     }
                     .tabItem {

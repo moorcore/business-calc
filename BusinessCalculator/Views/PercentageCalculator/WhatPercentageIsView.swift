@@ -108,7 +108,7 @@ struct WhatPercentageIsView: View {
     }
     
     init() {
-        loadValues() // Загружаем сохранённые данные при инициализации
+        loadValues()
     }
 }
 

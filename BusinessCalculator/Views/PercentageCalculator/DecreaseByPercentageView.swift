@@ -107,7 +107,7 @@ struct DecreaseByPercentageView: View {
     }
     
     init() {
-        loadValues() // Загружаем сохранённые данные при инициализации
+        loadValues()
     }
 }
 

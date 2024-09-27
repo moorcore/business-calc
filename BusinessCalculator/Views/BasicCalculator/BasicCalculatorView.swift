@@ -30,7 +30,7 @@ struct BasicCalculatorView: View {
                 .gesture(
                     DragGesture(minimumDistance: 20)
                         .onEnded { value in
-                            if value.translation.width < 0 { // Свайп влево
+                            if value.translation.width < 0 {
                                 removeLastCharacter()
                             }
                         }
@@ -159,23 +159,23 @@ struct BasicCalculatorView: View {
         displayText = formatResult(result)
         selectedOperation = nil
         isTypingNewNumber = true
-        self.firstValue = nil  // Сбрасываем значение после завершения операции
-        currentOperation = nil  // Сбрасываем операцию, чтобы избежать повторных действий
+        self.firstValue = nil
+        currentOperation = nil
         saveCurrentState()
     }
     
     func formatResult(_ result: Double) -> String {
         if result.truncatingRemainder(dividingBy: 1) == 0 {
-            return String(Int(result)) // Если результат целое число, выводим его без дробной части
+            return String(Int(result))
         } else {
-            return String(result) // Если есть дробная часть, выводим как есть
+            return String(result)
         }
     }
     
     func clear() {
         displayText = "0"
         currentOperation = nil
-        selectedOperation = nil // Сбрасываем выбранную операцию
+        selectedOperation = nil
         firstValue = nil
         isTypingNewNumber = true
         saveCurrentState()
@@ -212,18 +212,6 @@ struct BasicCalculatorView: View {
         return ["+", "-", "x", "÷"].contains(button)
     }
 }
-
-struct NoFlashButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .background(configuration.isPressed ? LinearGradient(gradient: Gradient(colors: [Color.blue, Color.cyan]), startPoint: .top, endPoint: .bottom) : LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom))
-            .scaleEffect(configuration.isPressed ? 1.0 : 1.0) // Оставляем масштаб без изменений
-            .opacity(1.0) // Убираем стандартное изменение прозрачности
-            .cornerRadius(10)
-            .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-    }
-}
-
 
 struct BasicCalculatorView_Previews: PreviewProvider {
     static var previews: some View {
