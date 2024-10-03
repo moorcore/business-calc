@@ -43,7 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EA2796A82CA4869500932D07 /* BusinessCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusinessCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA2796A82CA4869500932D07 /* Business Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Business Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2796AB2CA4869500932D07 /* BusinessCalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCalculatorApp.swift; sourceTree = "<group>"; };
 		EA2796AD2CA4869500932D07 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EA2796AF2CA4869800932D07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		EA2796A92CA4869500932D07 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EA2796A82CA4869500932D07 /* BusinessCalculator.app */,
+				EA2796A82CA4869500932D07 /* Business Calculator.app */,
 				EA2796B82CA4869900932D07 /* BusinessCalculatorTests.xctest */,
 				EA2796C22CA4869900932D07 /* BusinessCalculatorUITests.xctest */,
 			);
@@ -203,7 +203,7 @@
 			);
 			name = BusinessCalculator;
 			productName = BusinessCalculator;
-			productReference = EA2796A82CA4869500932D07 /* BusinessCalculator.app */;
+			productReference = EA2796A82CA4869500932D07 /* Business Calculator.app */;
 			productType = "com.apple.product-type.application";
 		};
 		EA2796B72CA4869900932D07 /* BusinessCalculatorTests */ = {
@@ -505,7 +505,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.maximboykin.BusinessCalculator;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Business Calculator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -535,7 +535,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.maximboykin.BusinessCalculator;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Business Calculator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
