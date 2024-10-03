@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct BasicCalculatorView: View {
+    
     @State private var displayText = "0"
-    @State private var currentOperation: String? = nil
-    @State private var firstValue: Double? = nil
-    @State private var isPressed = false
     @State private var selectedOperation: String? = nil
-    @State private var isTypingNewNumber = true
+    @State private var currentOperation: String? = nil
+    
+    @State private var firstValue: Double? = nil
+    
+    @State private var isPressed = false
+    @State private var isOperationCompleted = false
+
     
     var body: some View {
         VStack {
@@ -84,13 +89,14 @@ struct BasicCalculatorView: View {
     ]
     
     func buttonTapped(button: String) {
+        generateHapticFeedback()
         switch button {
         case "C":
             clear()
         case "+/-":
             toggleSign()
         case "%":
-            // TODO: finish this
+            handlePercentage()
             break
         case "÷", "x", "+", "-":
             handleOperation(button)
@@ -102,33 +108,32 @@ struct BasicCalculatorView: View {
     }
     
     func handleNumberInput(_ input: String) {
-        if isTypingNewNumber {
-            displayText = input == "." ? "0." : input
-            isTypingNewNumber = false
+        if isOperationCompleted {
+            return
+        }
+
+        if input == "." {
+            if !displayText.contains(".") {
+                displayText += input
+            }
         } else {
-            if input == "." {
-                if !displayText.contains(".") {
-                    displayText += input
-                }
+            if displayText == "0" && input != "." {
+                displayText = input
             } else {
-                if displayText == "0" && input != "." {
-                    displayText = input
-                } else {
-                    displayText += input
-                }
+                displayText += input
             }
         }
         saveCurrentState()
     }
     
     func handleOperation(_ operation: String) {
-        if let firstValue = firstValue, !isTypingNewNumber {
-            performCalculation()
+        if isOperationCompleted {
+            isOperationCompleted = false
         }
+        
         currentOperation = operation
-        selectedOperation = operation
         firstValue = Double(displayText)
-        isTypingNewNumber = true
+        displayText = "0"
         saveCurrentState()
     }
     
@@ -149,7 +154,7 @@ struct BasicCalculatorView: View {
             if secondValue != 0 {
                 result = firstValue / secondValue
             } else {
-                displayText = "Error"
+                displayText = "Ошибка"
                 return
             }
         default:
@@ -158,10 +163,22 @@ struct BasicCalculatorView: View {
         
         displayText = formatResult(result)
         selectedOperation = nil
-        isTypingNewNumber = true
         self.firstValue = nil
         currentOperation = nil
         saveCurrentState()
+    }
+    
+    func handlePercentage() {
+        guard let currentValue = Double(displayText) else { return }
+
+        if let operation = currentOperation, let firstValue = firstValue {
+            let percentageValue = firstValue * currentValue / 100
+            displayText = String(percentageValue)
+        } else {
+            displayText = String(currentValue / 100)
+        }
+
+        isOperationCompleted = true
     }
     
     func formatResult(_ result: Double) -> String {
@@ -175,15 +192,14 @@ struct BasicCalculatorView: View {
     func clear() {
         displayText = "0"
         currentOperation = nil
-        selectedOperation = nil
         firstValue = nil
-        isTypingNewNumber = true
+        isOperationCompleted = false
         saveCurrentState()
     }
     
     func toggleSign() {
         if let value = Double(displayText) {
-            displayText = String(value * -1)
+            displayText = formatResult(value * -1)
         }
         saveCurrentState()
     }
@@ -208,8 +224,9 @@ struct BasicCalculatorView: View {
         }
     }
     
-    func buttonIsOperator(_ button: String) -> Bool {
-        return ["+", "-", "x", "÷"].contains(button)
+    func generateHapticFeedback() {
+        let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light)
+        impactFeedbackgenerator.impactOccurred()
     }
 }
 

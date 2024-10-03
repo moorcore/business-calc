@@ -21,6 +21,8 @@
 		EA2796E42CA4929600932D07 /* IncreaseByPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2796E32CA4929600932D07 /* IncreaseByPercentageView.swift */; };
 		EA2796E62CA492A700932D07 /* FindPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2796E52CA492A700932D07 /* FindPercentageView.swift */; };
 		EA2796E82CA4CE3B00932D07 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2796E72CA4CE3B00932D07 /* Color+Hex.swift */; };
+		EA9830662CAC1857005A107D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA9830652CAC1857005A107D /* Launch Screen.storyboard */; };
+		EA9830682CAEAF15005A107D /* UIVIew+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9830672CAEAF15005A107D /* UIVIew+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		EA2796E32CA4929600932D07 /* IncreaseByPercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncreaseByPercentageView.swift; sourceTree = "<group>"; };
 		EA2796E52CA492A700932D07 /* FindPercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPercentageView.swift; sourceTree = "<group>"; };
 		EA2796E72CA4CE3B00932D07 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		EA9830652CAC1857005A107D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		EA9830672CAEAF15005A107D /* UIVIew+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,8 @@
 				EA2796AF2CA4869800932D07 /* Assets.xcassets */,
 				EA2796B12CA4869800932D07 /* Preview Content */,
 				EA2796E72CA4CE3B00932D07 /* Color+Hex.swift */,
+				EA9830652CAC1857005A107D /* Launch Screen.storyboard */,
+				EA9830672CAEAF15005A107D /* UIVIew+Extensions.swift */,
 			);
 			path = BusinessCalculator;
 			sourceTree = "<group>";
@@ -284,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA9830662CAC1857005A107D /* Launch Screen.storyboard in Resources */,
 				EA2796B32CA4869800932D07 /* Preview Assets.xcassets in Resources */,
 				EA2796B02CA4869800932D07 /* Assets.xcassets in Resources */,
 			);
@@ -316,6 +323,7 @@
 				EA2796AC2CA4869500932D07 /* BusinessCalculatorApp.swift in Sources */,
 				EA2796D82CA487C000932D07 /* BasicCalculatorView.swift in Sources */,
 				EA2796DE2CA4920400932D07 /* PercentageCalculatorMainView.swift in Sources */,
+				EA9830682CAEAF15005A107D /* UIVIew+Extensions.swift in Sources */,
 				EA2796E62CA492A700932D07 /* FindPercentageView.swift in Sources */,
 				EA2796E42CA4929600932D07 /* IncreaseByPercentageView.swift in Sources */,
 				EA2796E82CA4CE3B00932D07 /* Color+Hex.swift in Sources */,
@@ -488,6 +496,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -517,6 +526,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

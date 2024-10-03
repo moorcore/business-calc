@@ -72,6 +72,9 @@ struct FindPercentageView: View {
         .padding()
         .background(Color(hex: "#EBEBEB"))
         .edgesIgnoringSafeArea(.all)
+        .onTapGesture {
+            hideKeyboard()
+        }
         .onAppear {
             loadValues()
         }
