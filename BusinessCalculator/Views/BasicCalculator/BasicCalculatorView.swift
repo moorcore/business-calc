@@ -108,6 +108,8 @@ struct BasicCalculatorView: View {
     }
     
     func handleNumberInput(_ input: String) {
+        selectedOperation = nil
+        
         if isOperationCompleted {
             return
         }
@@ -131,6 +133,7 @@ struct BasicCalculatorView: View {
             isOperationCompleted = false
         }
         
+        selectedOperation = operation
         currentOperation = operation
         firstValue = Double(displayText)
         displayText = "0"

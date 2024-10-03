@@ -13,67 +13,69 @@ struct FindPercentageView: View {
     @State private var result: String = ""
     
     var body: some View {
-        VStack(spacing: 20) {
-            
-            Text("Найти процент")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(Color(hex: "#538296"))
-                .padding(.top, 40)
-            
-            Text("Результат: \(result)")
-                .font(.title2)
-                .fontWeight(.medium)
-                .padding()
-                .foregroundColor(result == "Error" || result.contains("Invalid") ? .red : Color(hex: "#538296"))
+        ZStack {
+            Color(hex: "#EBEBEB")
                 .onTapGesture {
-                    UIPasteboard.general.string = result
+                    hideKeyboard()
                 }
+                .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 20) {
-                TextField("Основное значение", text: $baseValue)
-                    .keyboardType(.decimalPad)
-                    .padding()
-                    .background(Color.white)
-                    .foregroundStyle(Color(hex: "#538296"))
-                    .cornerRadius(10)
-                    .tint(Color(hex: "#538296"))
-                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                
-                TextField("Процент", text: $percentage)
-                    .keyboardType(.decimalPad)
-                    .padding()
-                    .background(Color.white)
-                    .foregroundStyle(Color(hex: "#538296"))
-                    .cornerRadius(10)
-                    .tint(Color(hex: "#538296"))
-                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-            }
-            .padding(.horizontal)
-            
-            Button(action: {
-                if validateInput() {
-                    calculatePercentage()
-                }
-            }) {
-                Text("Рассчитать")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color(hex: "#C5DCE4"))
+                Text("Найти процент")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
                     .foregroundColor(Color(hex: "#538296"))
-                    .cornerRadius(10)
-                    .shadow(radius: 5)
+                    .padding(.top, 40)
+                
+                Text("Результат: \(result)")
+                    .font(.title2)
+                    .fontWeight(.medium)
+                    .padding()
+                    .foregroundColor(result == "Error" || result.contains("Invalid") ? .red : Color(hex: "#538296"))
+                    .onTapGesture {
+                        UIPasteboard.general.string = result
+                    }
+                
+                VStack(spacing: 20) {
+                    TextField("Основное значение", text: $baseValue)
+                        .keyboardType(.decimalPad)
+                        .padding()
+                        .background(Color.white)
+                        .foregroundStyle(Color(hex: "#538296"))
+                        .cornerRadius(10)
+                        .tint(Color(hex: "#538296"))
+                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                    
+                    TextField("Процент", text: $percentage)
+                        .keyboardType(.decimalPad)
+                        .padding()
+                        .background(Color.white)
+                        .foregroundStyle(Color(hex: "#538296"))
+                        .cornerRadius(10)
+                        .tint(Color(hex: "#538296"))
+                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                }
+                .padding(.horizontal)
+                
+                Button(action: {
+                    if validateInput() {
+                        calculatePercentage()
+                    }
+                }) {
+                    Text("Рассчитать")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color(hex: "#C5DCE4"))
+                        .foregroundColor(Color(hex: "#538296"))
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
+                }
+                .padding(.horizontal)
+                
+                Spacer()
             }
-            .padding(.horizontal)
-            
-            Spacer()
-        }
-        .padding()
-        .background(Color(hex: "#EBEBEB"))
-        .edgesIgnoringSafeArea(.all)
-        .onTapGesture {
-            hideKeyboard()
+            .padding()
         }
         .onAppear {
             loadValues()
