@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct MenuView: View {
-    @State private var showingFindPercentage = false
+    @State private var showingSettingsView = false
+    @State private var showingInfoView = false
     
     var body: some View {
         VStack(alignment: .leading) {
             Button(action: {
-                showingFindPercentage = true
+                showingSettingsView = true
             }) {
                 HStack {
                     Image(systemName: "gear")
@@ -22,13 +23,13 @@ struct MenuView: View {
                         .font(.headline)
                 }
             }
-            .sheet(isPresented: $showingFindPercentage) {
-                PercentageCalculatorMainView()
+            .sheet(isPresented: $showingSettingsView) {
+                SettingsView()
             }
             .padding(.top, 30)
             
             Button(action: {
-                showingFindPercentage = true
+                showingInfoView = true
             }) {
                 HStack {
                     Image(systemName: "info.circle")
@@ -37,8 +38,8 @@ struct MenuView: View {
                         .font(.headline)
                 }
             }
-            .sheet(isPresented: $showingFindPercentage) {
-                PercentageCalculatorMainView()
+            .sheet(isPresented: $showingInfoView) {
+                InfoView()
             }
             .padding(.top, 15)
             

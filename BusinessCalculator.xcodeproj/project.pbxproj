@@ -24,6 +24,8 @@
 		EA9830662CAC1857005A107D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA9830652CAC1857005A107D /* Launch Screen.storyboard */; };
 		EA9830682CAEAF15005A107D /* UIVIew+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9830672CAEAF15005A107D /* UIVIew+Extensions.swift */; };
 		EA98306C2CAED0B4005A107D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98306B2CAED0B4005A107D /* MenuView.swift */; };
+		EA9830702CAEF66C005A107D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98306F2CAEF66C005A107D /* InfoView.swift */; };
+		EA9830722CAEF885005A107D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9830712CAEF885005A107D /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		EA9830652CAC1857005A107D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		EA9830672CAEAF15005A107D /* UIVIew+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Extensions.swift"; sourceTree = "<group>"; };
 		EA98306B2CAED0B4005A107D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		EA98306F2CAEF66C005A107D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		EA9830712CAEF885005A107D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,8 +158,8 @@
 		EA2796D52CA4871100932D07 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EA9830732CAEFA5D005A107D /* Menu */,
 				EA2796AD2CA4869500932D07 /* ContentView.swift */,
-				EA98306B2CAED0B4005A107D /* MenuView.swift */,
 				EA2796DB2CA491B100932D07 /* BasicCalculator */,
 				EA2796DC2CA491C400932D07 /* PercentageCalculator */,
 			);
@@ -187,6 +191,16 @@
 				EA2796DF2CA4926400932D07 /* WhatPercentageIsView.swift */,
 			);
 			path = PercentageCalculator;
+			sourceTree = "<group>";
+		};
+		EA9830732CAEFA5D005A107D /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				EA98306B2CAED0B4005A107D /* MenuView.swift */,
+				EA98306F2CAEF66C005A107D /* InfoView.swift */,
+				EA9830712CAEF885005A107D /* SettingsView.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +338,7 @@
 				EA2796E22CA4927D00932D07 /* DecreaseByPercentageView.swift in Sources */,
 				EA2796E02CA4926400932D07 /* WhatPercentageIsView.swift in Sources */,
 				EA2796AC2CA4869500932D07 /* BusinessCalculatorApp.swift in Sources */,
+				EA9830702CAEF66C005A107D /* InfoView.swift in Sources */,
 				EA2796D82CA487C000932D07 /* BasicCalculatorView.swift in Sources */,
 				EA2796DE2CA4920400932D07 /* PercentageCalculatorMainView.swift in Sources */,
 				EA9830682CAEAF15005A107D /* UIVIew+Extensions.swift in Sources */,
@@ -331,6 +346,7 @@
 				EA2796E62CA492A700932D07 /* FindPercentageView.swift in Sources */,
 				EA2796E42CA4929600932D07 /* IncreaseByPercentageView.swift in Sources */,
 				EA2796E82CA4CE3B00932D07 /* Color+Hex.swift in Sources */,
+				EA9830722CAEF885005A107D /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
