@@ -10,7 +10,7 @@ import SwiftUI
 struct IncreaseByPercentageView: View {
     @State private var baseValue: String = ""
     @State private var percentage: String = ""
-    @State private var result: String = ""
+    @State private var result: String = "0"
     
     var body: some View {
         ZStack {
@@ -28,7 +28,7 @@ struct IncreaseByPercentageView: View {
                     .foregroundColor(Color(hex: "#538296"))
                     .padding(.top, 40)
                 
-                Text("Результат: \(result)")
+                Text(result)
                     .font(.title2)
                     .fontWeight(.medium)
                     .padding()
@@ -75,6 +75,20 @@ struct IncreaseByPercentageView: View {
                 }
                 .padding(.horizontal)
                 
+                Button(action: {
+                    clearFields()
+                }) {
+                    Text("Очистить")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.red.opacity(0.7))
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
+                }
+                .padding(.horizontal)
+                
                 Spacer()
             }
             .onAppear {
@@ -110,6 +124,14 @@ struct IncreaseByPercentageView: View {
         baseValue = UserDefaults.standard.string(forKey: "IncreaseBaseValue") ?? ""
         percentage = UserDefaults.standard.string(forKey: "IncreasePercentage") ?? ""
         result = UserDefaults.standard.string(forKey: "IncreaseResult") ?? ""
+    }
+    
+    private func clearFields() {
+        baseValue = ""
+        percentage = ""
+        result = "0"
+        
+        saveValues()
     }
     
     init() {

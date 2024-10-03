@@ -10,7 +10,7 @@ import SwiftUI
 struct WhatPercentageIsView: View {
     @State private var firstValue: String = ""
     @State private var secondValue: String = ""
-    @State private var result: String = ""
+    @State private var result: String = "0"
     
     var body: some View {
         ZStack {
@@ -28,7 +28,7 @@ struct WhatPercentageIsView: View {
                     .foregroundColor(Color(hex: "#538296"))
                     .padding(.top, 40)
                 
-                Text("Результат: \(result)")
+                Text(result)
                     .font(.title2)
                     .fontWeight(.medium)
                     .padding()
@@ -75,6 +75,20 @@ struct WhatPercentageIsView: View {
                 }
                 .padding(.horizontal)
                 
+                Button(action: {
+                    clearFields()
+                }) {
+                    Text("Очистить")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.red.opacity(0.7))
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
+                }
+                .padding(.horizontal)
+                
                 Spacer()
             }
             .onAppear {
@@ -110,6 +124,14 @@ struct WhatPercentageIsView: View {
         firstValue = UserDefaults.standard.string(forKey: "WhatPercentageFirstValue") ?? ""
         secondValue = UserDefaults.standard.string(forKey: "WhatPercentageSecondValue") ?? ""
         result = UserDefaults.standard.string(forKey: "WhatPercentageResult") ?? ""
+    }
+    
+    private func clearFields() {
+        firstValue = ""
+        secondValue = ""
+        result = "0"
+        
+        saveValues()
     }
     
     init() {

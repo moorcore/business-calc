@@ -15,6 +15,8 @@ struct BasicCalculatorView: View {
     @State private var currentOperation: String? = nil
     
     @State private var firstValue: Double? = nil
+    @State private var maxValue: Double = Double.greatestFiniteMagnitude
+
     
     @State private var isPressed = false
     @State private var isOperationCompleted = false
@@ -29,6 +31,8 @@ struct BasicCalculatorView: View {
                 .cornerRadius(10)
                 .foregroundColor(Color(hex: "#538296"))
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
                 .onTapGesture {
                     UIPasteboard.general.string = displayText
                 }
@@ -108,9 +112,15 @@ struct BasicCalculatorView: View {
     }
     
     func handleNumberInput(_ input: String) {
+        
         selectedOperation = nil
         
         if isOperationCompleted {
+            return
+        }
+
+        if let currentValue = Double(displayText), currentValue > maxValue {
+            displayText = "Ошибка"
             return
         }
 
@@ -125,8 +135,10 @@ struct BasicCalculatorView: View {
                 displayText += input
             }
         }
+        
         saveCurrentState()
     }
+
     
     func handleOperation(_ operation: String) {
         if isOperationCompleted {
@@ -158,12 +170,19 @@ struct BasicCalculatorView: View {
                 result = firstValue / secondValue
             } else {
                 displayText = "Ошибка"
+                isOperationCompleted = true
                 return
             }
         default:
             return
         }
-        
+
+        if result > maxValue {
+            displayText = "Ошибка"
+            isOperationCompleted = true
+            return
+        }
+
         displayText = formatResult(result)
         selectedOperation = nil
         self.firstValue = nil
@@ -186,11 +205,16 @@ struct BasicCalculatorView: View {
     
     func formatResult(_ result: Double) -> String {
         if result.truncatingRemainder(dividingBy: 1) == 0 {
-            return String(Int(result))
+            if result > Double(Int.max) {
+                return String(result)
+            } else {
+                return String(Int(result))
+            }
         } else {
             return String(result)
         }
     }
+
     
     func clear() {
         displayText = "0"
