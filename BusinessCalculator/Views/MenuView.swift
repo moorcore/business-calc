@@ -8,33 +8,47 @@
 import SwiftUI
 
 struct MenuView: View {
+    @State private var showingFindPercentage = false
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Меню")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding(.top, 100)
+            Button(action: {
+                showingFindPercentage = true
+            }) {
+                HStack {
+                    Image(systemName: "gear")
+                        .imageScale(.large)
+                    Text("Настройки")
+                        .font(.headline)
+                }
+            }
+            .sheet(isPresented: $showingFindPercentage) {
+                PercentageCalculatorMainView()
+            }
+            .padding(.top, 30)
             
             Button(action: {
-                // Действие для кнопки меню
+                showingFindPercentage = true
             }) {
-                Text("Пункт 1")
-                    .font(.headline)
-                    .padding()
+                HStack {
+                    Image(systemName: "info.circle")
+                        .imageScale(.large)
+                    Text("Инфо")
+                        .font(.headline)
+                }
             }
-            
-            Button(action: {
-                // Действие для кнопки меню
-            }) {
-                Text("Пункт 2")
-                    .font(.headline)
-                    .padding()
+            .sheet(isPresented: $showingFindPercentage) {
+                PercentageCalculatorMainView()
             }
+            .padding(.top, 15)
             
             Spacer()
         }
+        .padding()
+        .padding(.top, 50)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.gray.opacity(0.9))
+        .background(Color(hex: "#538296"))
+        .foregroundStyle(Color(hex: "#EBEBEB"))
         .edgesIgnoringSafeArea(.all)
     }
 }

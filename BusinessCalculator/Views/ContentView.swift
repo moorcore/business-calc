@@ -12,43 +12,45 @@ struct ContentView: View {
     @State private var dragOffset: CGFloat = 0
 
     var body: some View {
-        ZStack {
-            mainContent
-                .overlay(
-                    Color.black.opacity(showMenu ? 0.3 : 0)
-                        .ignoresSafeArea()
-                        .onTapGesture {
-                            withAnimation {
-                                showMenu = false
-                            }
-                        }
-                )
-                .gesture(
-                    DragGesture()
-                        .onEnded { value in
-                            if value.translation.width > 100 {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                mainContent
+                    .overlay(
+                        Color.black.opacity(showMenu ? 0.3 : 0)
+                            .ignoresSafeArea()
+                            .onTapGesture {
                                 withAnimation {
-                                    showMenu = true
+                                    showMenu = false
                                 }
                             }
-                        }
-                )
-
-            if showMenu {
-                MenuView()
-                    .frame(width: 250)
-                    .transition(.move(edge: .leading))
-                    .animation(.easeInOut, value: showMenu)
+                    )
                     .gesture(
                         DragGesture()
                             .onEnded { value in
-                                if value.translation.width < -100 {
+                                if value.translation.width > 100 {
                                     withAnimation {
-                                        showMenu = false
+                                        showMenu = true
                                     }
                                 }
                             }
                     )
+
+                if showMenu {
+                    MenuView()
+                        .frame(width: geometry.size.width / 2)
+                        .transition(.move(edge: .leading))
+                        .animation(.easeInOut, value: showMenu)
+                        .gesture(
+                            DragGesture()
+                                .onEnded { value in
+                                    if value.translation.width < -100 {
+                                        withAnimation {
+                                            showMenu = false
+                                        }
+                                    }
+                                }
+                        )
+                }
             }
         }
     }
