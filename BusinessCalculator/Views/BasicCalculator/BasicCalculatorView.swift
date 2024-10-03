@@ -11,19 +11,31 @@ import UIKit
 struct BasicCalculatorView: View {
     
     @State private var displayText = "0"
+    @State private var calculationChain = ""
     @State private var selectedOperation: String? = nil
     @State private var currentOperation: String? = nil
     
     @State private var firstValue: Double? = nil
     @State private var maxValue: Double = Double.greatestFiniteMagnitude
 
-    
     @State private var isPressed = false
+    @State private var operatorPressed = false
     @State private var isOperationCompleted = false
 
+    @AppStorage("customLogic") private var customLogic: Bool = false
     
     var body: some View {
         VStack {
+            if customLogic {
+                Text(calculationChain)
+                    .font(.title2)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .foregroundColor(Color(hex: "#538296"))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+            }
+            
             Text(displayText)
                 .font(.system(size: 70))
                 .padding()
@@ -39,7 +51,7 @@ struct BasicCalculatorView: View {
                 .gesture(
                     DragGesture(minimumDistance: 20)
                         .onEnded { value in
-                            if value.translation.width < 0 {
+                            if value.translation.width < -50 {
                                 removeLastCharacter()
                             }
                         }
@@ -89,7 +101,7 @@ struct BasicCalculatorView: View {
         ["7", "8", "9", "x"],
         ["4", "5", "6", "-"],
         ["1", "2", "3", "+"],
-        ["", "0", ".", "="]
+        ["⌫", "0", ".", "="]
     ]
     
     func buttonTapped(button: String) {
@@ -101,19 +113,21 @@ struct BasicCalculatorView: View {
             toggleSign()
         case "%":
             handlePercentage()
-            break
         case "÷", "x", "+", "-":
             handleOperation(button)
         case "=":
             performCalculation()
+        case "⌫":
+            removeLastCharacter()
         default:
             handleNumberInput(button)
         }
     }
     
     func handleNumberInput(_ input: String) {
-        
         selectedOperation = nil
+        
+        operatorPressed = false
         
         if isOperationCompleted {
             return
@@ -135,23 +149,67 @@ struct BasicCalculatorView: View {
                 displayText += input
             }
         }
-        
+
+        if customLogic {
+            calculationChain += input
+        }
+
         saveCurrentState()
     }
 
-    
+
     func handleOperation(_ operation: String) {
         if isOperationCompleted {
             isOperationCompleted = false
         }
-        
+
+        if operatorPressed {
+            return
+        }
+
+        if let firstValue = firstValue, let currentValue = Double(displayText), let currentOperation = currentOperation {
+            var result: Double = 0
+            
+            switch currentOperation {
+            case "+":
+                result = firstValue + currentValue
+            case "-":
+                result = firstValue - currentValue
+            case "x":
+                result = firstValue * currentValue
+            case "÷":
+                if currentValue != 0 {
+                    result = firstValue / currentValue
+                } else {
+                    displayText = "Ошибка"
+                    isOperationCompleted = true
+                    return
+                }
+            default:
+                return
+            }
+
+            displayText = formatResult(result)
+            self.firstValue = result
+        } else {
+            firstValue = Double(displayText)
+        }
+
         selectedOperation = operation
         currentOperation = operation
-        firstValue = Double(displayText)
         displayText = "0"
+
+        if customLogic {
+            let lastChar = calculationChain.last
+            if lastChar != "+" && lastChar != "-" && lastChar != "x" && lastChar != "÷" && lastChar != " " {
+                calculationChain += " \(operation) "
+            }
+        }
+
+        operatorPressed = true
         saveCurrentState()
     }
-    
+
     func performCalculation() {
         guard let firstValue = firstValue, let secondValue = Double(displayText), let operation = currentOperation else {
             return
@@ -184,6 +242,11 @@ struct BasicCalculatorView: View {
         }
 
         displayText = formatResult(result)
+
+        if customLogic {
+            calculationChain += " = \(formatResult(result))"
+        }
+
         selectedOperation = nil
         self.firstValue = nil
         currentOperation = nil
@@ -218,6 +281,7 @@ struct BasicCalculatorView: View {
     
     func clear() {
         displayText = "0"
+        calculationChain = ""
         currentOperation = nil
         firstValue = nil
         isOperationCompleted = false
@@ -232,23 +296,36 @@ struct BasicCalculatorView: View {
     }
     
     func removeLastCharacter() {
+        if isOperationCompleted {
+            return
+        }
+
         if !displayText.isEmpty && displayText != "0" {
             displayText.removeLast()
             if displayText.isEmpty {
                 displayText = "0"
             }
-            saveCurrentState()
         }
+
+        if customLogic && !calculationChain.isEmpty {
+            let lastChar = calculationChain.last
+            if let lastChar = lastChar, lastChar.isNumber {
+                calculationChain.removeLast()
+            }
+        }
+        
+        saveCurrentState()
     }
+
     
     func saveCurrentState() {
         UserDefaults.standard.set(displayText, forKey: "displayText")
+        UserDefaults.standard.set(calculationChain, forKey: "calculationChain")
     }
     
     func loadSavedState() {
-        if let savedText = UserDefaults.standard.string(forKey: "displayText") {
-            displayText = savedText
-        }
+        displayText = UserDefaults.standard.string(forKey: "displayText") ?? "0"
+        calculationChain = UserDefaults.standard.string(forKey: "calculationChain") ?? ""
     }
     
     func generateHapticFeedback() {
@@ -262,7 +339,3 @@ struct BasicCalculatorView_Previews: PreviewProvider {
         BasicCalculatorView()
     }
 }
-
-
-
-

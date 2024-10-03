@@ -158,8 +158,8 @@
 		EA2796D52CA4871100932D07 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EA9830732CAEFA5D005A107D /* Menu */,
 				EA2796AD2CA4869500932D07 /* ContentView.swift */,
+				EA9830732CAEFA5D005A107D /* Menu */,
 				EA2796DB2CA491B100932D07 /* BasicCalculator */,
 				EA2796DC2CA491C400932D07 /* PercentageCalculator */,
 			);
