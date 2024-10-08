@@ -12,6 +12,8 @@ struct WhatPercentageIsView: View {
     @State private var secondValue: String = ""
     @State private var result: String = "0"
     
+    @AppStorage("saveState") private var saveState: Bool = false
+    
     var body: some View {
         ZStack {
             Color(hex: "#EBEBEB")
@@ -111,7 +113,9 @@ struct WhatPercentageIsView: View {
             return
         }
         result = String((first / second) * 100)
-        saveValues()
+        if saveState {
+            saveValues()
+        }
     }
     
     private func saveValues() {
@@ -131,7 +135,9 @@ struct WhatPercentageIsView: View {
         secondValue = ""
         result = "0"
         
-        saveValues()
+        if saveState {
+            saveValues()
+        }
     }
     
     init() {

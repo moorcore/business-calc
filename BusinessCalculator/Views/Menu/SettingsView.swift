@@ -11,6 +11,7 @@ struct SettingsView: View {
     
     @AppStorage("showTabs") private var showTabs: Bool = true
     @AppStorage("customLogic") private var customLogic: Bool = false
+    @AppStorage("saveState") private var saveState: Bool = false
 
     var body: some View {
         VStack(spacing: 20) {
@@ -29,7 +30,15 @@ struct SettingsView: View {
             .toggleStyle(SwitchToggleStyle(tint: Color(hex: "#538296")))
 
             Toggle(isOn: $customLogic) {
-                Text("Использовать кастомную логику результата")
+                Text("Отображать цепь операций")
+                    .font(.headline)
+                    .foregroundColor(Color(hex: "#538296"))
+            }
+            .padding()
+            .toggleStyle(SwitchToggleStyle(tint: Color(hex: "#538296")))
+            
+            Toggle(isOn: $saveState) {
+                Text("Сохранять результат")
                     .font(.headline)
                     .foregroundColor(Color(hex: "#538296"))
             }

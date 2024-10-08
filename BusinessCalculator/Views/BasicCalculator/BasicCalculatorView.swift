@@ -23,9 +23,10 @@ struct BasicCalculatorView: View {
     @State private var isOperationCompleted = false
 
     @AppStorage("customLogic") private var customLogic: Bool = false
+    @AppStorage("saveState") private var saveState: Bool = false
     
     var body: some View {
-        VStack {
+        VStack(spacing: 15) {
             if customLogic {
                 Text(calculationChain)
                     .font(.title2)
@@ -34,6 +35,9 @@ struct BasicCalculatorView: View {
                     .foregroundColor(Color(hex: "#538296"))
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
+                    .background(Color.clear)
+            } else {
+                Spacer().frame(height: 40)
             }
             
             Text(displayText)
@@ -125,14 +129,14 @@ struct BasicCalculatorView: View {
     }
     
     func handleNumberInput(_ input: String) {
-        selectedOperation = nil
+        if isOperationCompleted {
+            displayText = "0"
+            isOperationCompleted = false
+        }
         
+        selectedOperation = nil
         operatorPressed = false
         
-        if isOperationCompleted {
-            return
-        }
-
         if let currentValue = Double(displayText), currentValue > maxValue {
             displayText = "Ошибка"
             return
@@ -153,10 +157,10 @@ struct BasicCalculatorView: View {
         if customLogic {
             calculationChain += input
         }
-
-        saveCurrentState()
+        if saveState {
+            saveCurrentState()
+        }
     }
-
 
     func handleOperation(_ operation: String) {
         if isOperationCompleted {
@@ -207,7 +211,9 @@ struct BasicCalculatorView: View {
         }
 
         operatorPressed = true
-        saveCurrentState()
+        if saveState {
+            saveCurrentState()
+        }
     }
 
     func performCalculation() {
@@ -242,15 +248,13 @@ struct BasicCalculatorView: View {
         }
 
         displayText = formatResult(result)
-
-        if customLogic {
-            calculationChain += " = \(formatResult(result))"
-        }
-
         selectedOperation = nil
         self.firstValue = nil
         currentOperation = nil
-        saveCurrentState()
+        isOperationCompleted = true
+        if saveState {
+            saveCurrentState()
+        }
     }
     
     func handlePercentage() {
@@ -285,14 +289,18 @@ struct BasicCalculatorView: View {
         currentOperation = nil
         firstValue = nil
         isOperationCompleted = false
-        saveCurrentState()
+        if saveState {
+            saveCurrentState()
+        }
     }
     
     func toggleSign() {
         if let value = Double(displayText) {
             displayText = formatResult(value * -1)
         }
-        saveCurrentState()
+        if saveState {
+            saveCurrentState()
+        }
     }
     
     func removeLastCharacter() {
@@ -314,7 +322,9 @@ struct BasicCalculatorView: View {
             }
         }
         
-        saveCurrentState()
+        if saveState {
+            saveCurrentState()
+        }
     }
 
     
