@@ -1,5 +1,5 @@
 //
-//  UIVIew+Extensions.swift
+//  UIView+Extensions.swift
 //  BusinessCalculator
 //
 //  Created by Maxim Boykin on 3.10.24..

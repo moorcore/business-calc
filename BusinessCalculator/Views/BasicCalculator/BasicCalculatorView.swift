@@ -32,7 +32,7 @@ struct BasicCalculatorView: View {
                     .font(.title2)
                     .padding()
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .foregroundColor(Color(hex: "#538296"))
+                    .foregroundColor(Color.adaptiveText)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .background(Color.clear)
@@ -45,7 +45,7 @@ struct BasicCalculatorView: View {
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .cornerRadius(10)
-                .foregroundColor(Color(hex: "#538296"))
+                .foregroundColor(Color.adaptiveText)
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
@@ -73,12 +73,13 @@ struct BasicCalculatorView: View {
                                 Text(button)
                                     .font(.largeTitle)
                                     .frame(width: 80, height: 80)
-                                    .background(selectedOperation == button ? Color(hex: "#E1E5F2") : Color(hex: "#C5DCE4"))
-                                    .foregroundColor(Color(hex: "#538296"))
+                                    .background(selectedOperation == button ? Color.adaptiveButtonHighlight : Color.adaptiveButtonBackground)
+                                    .foregroundColor(Color.adaptiveText)
                                     .cornerRadius(10)
                                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
                                     .scaleEffect(isPressed ? 1.1 : 1.0)
                                     .animation(.easeInOut(duration: 0.1), value: isPressed)
+                                    .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0), value: isPressed)
                             }
                             .gesture(
                                 DragGesture(minimumDistance: 0)
@@ -260,7 +261,7 @@ struct BasicCalculatorView: View {
     func handlePercentage() {
         guard let currentValue = Double(displayText) else { return }
 
-        if let operation = currentOperation, let firstValue = firstValue {
+        if let currentOperation, let firstValue = firstValue {
             let percentageValue = firstValue * currentValue / 100
             displayText = String(percentageValue)
         } else {
@@ -286,6 +287,7 @@ struct BasicCalculatorView: View {
     func clear() {
         displayText = "0"
         calculationChain = ""
+        selectedOperation = nil
         currentOperation = nil
         firstValue = nil
         isOperationCompleted = false

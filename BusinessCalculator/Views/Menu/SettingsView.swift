@@ -18,37 +18,37 @@ struct SettingsView: View {
             Text("Настройки")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .foregroundColor(Color(hex: "#538296"))
+                .foregroundColor(Color.adaptiveText)
                 .padding(.top, 40)
 
             Toggle(isOn: $showTabs) {
                 Text("Показывать вкладки")
                     .font(.headline)
-                    .foregroundColor(Color(hex: "#538296"))
+                    .foregroundColor(Color.adaptiveText)
             }
             .padding()
-            .toggleStyle(SwitchToggleStyle(tint: Color(hex: "#538296")))
+            .toggleStyle(SwitchToggleStyle(tint: Color.adaptiveText))
 
             Toggle(isOn: $customLogic) {
                 Text("Отображать цепь операций")
                     .font(.headline)
-                    .foregroundColor(Color(hex: "#538296"))
+                    .foregroundColor(Color.adaptiveText)
             }
             .padding()
-            .toggleStyle(SwitchToggleStyle(tint: Color(hex: "#538296")))
+            .toggleStyle(SwitchToggleStyle(tint: Color.adaptiveText))
             
             Toggle(isOn: $saveState) {
                 Text("Сохранять результат")
                     .font(.headline)
-                    .foregroundColor(Color(hex: "#538296"))
+                    .foregroundColor(Color.adaptiveText)
             }
             .padding()
-            .toggleStyle(SwitchToggleStyle(tint: Color(hex: "#538296")))
+            .toggleStyle(SwitchToggleStyle(tint: Color.adaptiveText))
 
             Spacer()
         }
         .padding()
-        .background(Color(hex: "#EBEBEB"))
+        .background(Color.adaptiveBackground)
         .edgesIgnoringSafeArea(.all)
     }
 }

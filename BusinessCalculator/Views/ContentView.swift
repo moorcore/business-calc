@@ -28,7 +28,7 @@ struct ContentView: View {
                         )
                 } else {
                     BasicCalculatorView()
-                        .background(Color(hex: "#EBEBEB")
+                        .background(Color.adaptiveBackground
                                     .edgesIgnoringSafeArea(.all)
                         )
                         .overlay(
@@ -74,14 +74,14 @@ struct ContentView: View {
 
     var mainContentWithTabs: some View {
         ZStack {
-            Color(hex: "#EBEBEB")
+            Color.adaptiveBackground
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
                 TabView {
                     ZStack {
                         BasicCalculatorView()
-                            .background(Color(hex: "#EBEBEB")
+                            .background(Color.adaptiveBackground
                                     .edgesIgnoringSafeArea(.all)
                             )
                     }
@@ -91,7 +91,7 @@ struct ContentView: View {
                     
                     ZStack {
                         PercentageCalculatorMainView()
-                            .background(Color(hex: "#EBEBEB")
+                            .background(Color.adaptiveBackground
                                     .edgesIgnoringSafeArea(.all)
                             )
                     }
@@ -99,7 +99,7 @@ struct ContentView: View {
                         Label("Проценты", systemImage: "percent")
                     }
                 }
-                .tint(Color(hex: "#538296"))
+                .tint(Color.adaptiveText)
             }
         }
     }

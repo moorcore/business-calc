@@ -20,7 +20,7 @@ struct PercentageCalculatorMainView: View {
             Text("Процентные вычисления")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .foregroundColor(Color(hex: "#538296"))
+                .foregroundColor(Color.adaptiveText)
                 .padding(.top, 40)
             
             Spacer()
@@ -32,8 +32,8 @@ struct PercentageCalculatorMainView: View {
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color(hex: "#C5DCE4"))
-                    .foregroundColor(Color(hex: "#538296"))
+                    .background(Color.adaptiveButtonBackground)
+                    .foregroundColor(Color.adaptiveText)
                     .cornerRadius(10)
                     .shadow(radius: 5)
             }
@@ -48,8 +48,8 @@ struct PercentageCalculatorMainView: View {
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color(hex: "#C5DCE4"))
-                    .foregroundColor(Color(hex: "#538296"))
+                    .background(Color.adaptiveButtonBackground)
+                    .foregroundColor(Color.adaptiveText)
                     .cornerRadius(10)
                     .shadow(radius: 5)
             }
@@ -64,8 +64,8 @@ struct PercentageCalculatorMainView: View {
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color(hex: "#C5DCE4"))
-                    .foregroundColor(Color(hex: "#538296"))
+                    .background(Color.adaptiveButtonBackground)
+                    .foregroundColor(Color.adaptiveText)
                     .cornerRadius(10)
                     .shadow(radius: 5)
             }
@@ -80,8 +80,8 @@ struct PercentageCalculatorMainView: View {
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color(hex: "#C5DCE4"))
-                    .foregroundColor(Color(hex: "#538296"))
+                    .background(Color.adaptiveButtonBackground)
+                    .foregroundColor(Color.adaptiveText)
                     .cornerRadius(10)
                     .shadow(radius: 5)
             }
@@ -92,7 +92,7 @@ struct PercentageCalculatorMainView: View {
             Spacer()
         }
         .padding()
-        .background(Color(hex: "#EBEBEB"))
+        .background(Color.adaptiveBackground)
         .edgesIgnoringSafeArea(.all)
     }
 }

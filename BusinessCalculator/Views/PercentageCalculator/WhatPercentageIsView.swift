@@ -16,7 +16,7 @@ struct WhatPercentageIsView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "#EBEBEB")
+            Color.adaptiveBackground
                 .onTapGesture {
                     hideKeyboard()
                 }
@@ -27,14 +27,14 @@ struct WhatPercentageIsView: View {
                 Text("Какой процент")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(Color(hex: "#538296"))
+                    .foregroundColor(Color.adaptiveText)
                     .padding(.top, 40)
                 
                 Text(result)
                     .font(.title2)
                     .fontWeight(.medium)
                     .padding()
-                    .foregroundColor(result == "Error" || result.contains("Invalid") ? .red : Color(hex: "#538296"))
+                    .foregroundColor(result == "Error" || result.contains("Invalid") ? .red : Color.adaptiveText)
                     .cornerRadius(10)
                     .onTapGesture {
                         UIPasteboard.general.string = result
@@ -44,20 +44,20 @@ struct WhatPercentageIsView: View {
                     TextField("Первое значение", text: $firstValue)
                         .keyboardType(.decimalPad)
                         .padding()
-                        .background(Color.white)
-                        .foregroundStyle(Color(hex: "#538296"))
+                        .background(Color.adaptiveButtonHighlight.opacity(0.2))
+                        .foregroundStyle(Color.adaptiveText)
                         .cornerRadius(10)
                         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                        .tint(Color(hex: "#538296"))
+                        .tint(Color.adaptiveText)
                     
                     TextField("Второе значение", text: $secondValue)
                         .keyboardType(.decimalPad)
                         .padding()
-                        .background(Color.white)
-                        .foregroundStyle(Color(hex: "#538296"))
+                        .background(Color.adaptiveButtonHighlight.opacity(0.2))
+                        .foregroundStyle(Color.adaptiveText)
                         .cornerRadius(10)
                         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                        .tint(Color(hex: "#538296"))
+                        .tint(Color.adaptiveText)
                 }
                 .padding(.horizontal)
                 
@@ -70,8 +70,8 @@ struct WhatPercentageIsView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color(hex: "#C5DCE4"))
-                        .foregroundColor(Color(hex: "#538296"))
+                        .background(Color.adaptiveButtonBackground)
+                        .foregroundColor(Color.adaptiveText)
                         .cornerRadius(10)
                         .shadow(radius: 5)
                 }

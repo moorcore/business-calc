@@ -22,7 +22,7 @@
 		EA2796E62CA492A700932D07 /* FindPercentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2796E52CA492A700932D07 /* FindPercentageView.swift */; };
 		EA2796E82CA4CE3B00932D07 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2796E72CA4CE3B00932D07 /* Color+Hex.swift */; };
 		EA9830662CAC1857005A107D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA9830652CAC1857005A107D /* Launch Screen.storyboard */; };
-		EA9830682CAEAF15005A107D /* UIVIew+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9830672CAEAF15005A107D /* UIVIew+Extensions.swift */; };
+		EA9830682CAEAF15005A107D /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9830672CAEAF15005A107D /* UIView+Extensions.swift */; };
 		EA98306C2CAED0B4005A107D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98306B2CAED0B4005A107D /* MenuView.swift */; };
 		EA9830702CAEF66C005A107D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA98306F2CAEF66C005A107D /* InfoView.swift */; };
 		EA9830722CAEF885005A107D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9830712CAEF885005A107D /* SettingsView.swift */; };
@@ -64,7 +64,7 @@
 		EA2796E52CA492A700932D07 /* FindPercentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPercentageView.swift; sourceTree = "<group>"; };
 		EA2796E72CA4CE3B00932D07 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		EA9830652CAC1857005A107D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		EA9830672CAEAF15005A107D /* UIVIew+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIew+Extensions.swift"; sourceTree = "<group>"; };
+		EA9830672CAEAF15005A107D /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		EA98306B2CAED0B4005A107D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		EA98306F2CAEF66C005A107D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		EA9830712CAEF885005A107D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -119,13 +119,11 @@
 			isa = PBXGroup;
 			children = (
 				EA2796AB2CA4869500932D07 /* BusinessCalculatorApp.swift */,
-				EA2796D62CA4872B00932D07 /* Models */,
+				EAFCBD632CB6ACD80020D4F8 /* Extensions */,
 				EA2796D52CA4871100932D07 /* Views */,
-				EA2796AF2CA4869800932D07 /* Assets.xcassets */,
 				EA2796B12CA4869800932D07 /* Preview Content */,
-				EA2796E72CA4CE3B00932D07 /* Color+Hex.swift */,
+				EA2796AF2CA4869800932D07 /* Assets.xcassets */,
 				EA9830652CAC1857005A107D /* Launch Screen.storyboard */,
-				EA9830672CAEAF15005A107D /* UIVIew+Extensions.swift */,
 			);
 			path = BusinessCalculator;
 			sourceTree = "<group>";
@@ -166,13 +164,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		EA2796D62CA4872B00932D07 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		EA2796DB2CA491B100932D07 /* BasicCalculator */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +192,15 @@
 				EA9830712CAEF885005A107D /* SettingsView.swift */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		EAFCBD632CB6ACD80020D4F8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EA2796E72CA4CE3B00932D07 /* Color+Hex.swift */,
+				EA9830672CAEAF15005A107D /* UIView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,7 +341,7 @@
 				EA9830702CAEF66C005A107D /* InfoView.swift in Sources */,
 				EA2796D82CA487C000932D07 /* BasicCalculatorView.swift in Sources */,
 				EA2796DE2CA4920400932D07 /* PercentageCalculatorMainView.swift in Sources */,
-				EA9830682CAEAF15005A107D /* UIVIew+Extensions.swift in Sources */,
+				EA9830682CAEAF15005A107D /* UIView+Extensions.swift in Sources */,
 				EA98306C2CAED0B4005A107D /* MenuView.swift in Sources */,
 				EA2796E62CA492A700932D07 /* FindPercentageView.swift in Sources */,
 				EA2796E42CA4929600932D07 /* IncreaseByPercentageView.swift in Sources */,
