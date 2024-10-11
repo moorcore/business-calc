@@ -12,6 +12,7 @@ struct SettingsView: View {
     @AppStorage("showTabs") private var showTabs: Bool = true
     @AppStorage("customLogic") private var customLogic: Bool = false
     @AppStorage("saveState") private var saveState: Bool = false
+    @EnvironmentObject var themeManager: ThemeManager
 
     var body: some View {
         VStack(spacing: 20) {
@@ -44,18 +45,27 @@ struct SettingsView: View {
             }
             .padding()
             .toggleStyle(SwitchToggleStyle(tint: Color.adaptiveText))
+            
+            Toggle(isOn: $themeManager.isDarkMode) {
+                Text("Тёмная тема")
+                    .font(.headline)
+                    .foregroundColor(Color.adaptiveText)
+            }
+            .padding()
+            .toggleStyle(SwitchToggleStyle(tint: Color.adaptiveText))
 
             Spacer()
         }
         .padding()
         .background(Color.adaptiveBackground)
         .edgesIgnoringSafeArea(.all)
+        .preferredColorScheme(themeManager.currentColorScheme)
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView().environmentObject(ThemeManager())
     }
 }
 
