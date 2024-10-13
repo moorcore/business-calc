@@ -17,86 +17,112 @@ struct BasicCalculatorView: View {
     
     @State private var firstValue: Double? = nil
     @State private var maxValue: Double = Double.greatestFiniteMagnitude
+    
+    @State private var notificationTimer: Timer? = nil
 
     @State private var isPressed = false
     @State private var operatorPressed = false
     @State private var isOperationCompleted = false
+    @State private var showCopyNotification = false
 
     @AppStorage("customLogic") private var customLogic: Bool = false
     @AppStorage("saveState") private var saveState: Bool = false
     
     var body: some View {
-        VStack(spacing: 15) {
-            if customLogic {
-                Text(calculationChain)
-                    .font(.title2)
+        ZStack {
+            
+            VStack(spacing: 15) {
+                if customLogic {
+                    Text(calculationChain)
+                        .font(.title2)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .foregroundColor(Color.adaptiveText)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .background(Color.clear)
+                } else {
+                    Spacer().frame(height: 40)
+                }
+                
+                Text(displayText)
+                    .font(.system(size: 80))
                     .padding()
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .frame(maxWidth: CGFloat.infinity, alignment: .trailing)
+                    .cornerRadius(10)
                     .foregroundColor(Color.adaptiveText)
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                    .background(Color.clear)
-            } else {
-                Spacer().frame(height: 40)
-            }
-            
-            Text(displayText)
-                .font(.system(size: 70))
-                .padding()
-                .frame(maxWidth: CGFloat.infinity, alignment: .trailing)
-                .cornerRadius(10)
-                .foregroundColor(Color.adaptiveText)
-                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
-                .onTapGesture {
-                    UIPasteboard.general.string = displayText
-                }
-                .gesture(
-                    DragGesture(minimumDistance: 20)
-                        .onEnded { value in
-                            if value.translation.width < -50 {
-                                removeLastCharacter()
+                    .onTapGesture {
+                        copyToClipboard()
+                    }
+                    // Not working for now
+                    .gesture(
+                        DragGesture(minimumDistance: 20)
+                            .onEnded { value in
+                                if value.translation.width < -50 {
+                                    removeLastCharacter()
+                                }
                             }
-                        }
-                )
+                    )
 
-            Spacer()
-            
-            VStack(spacing: 10) {
-                ForEach(buttonsArray, id: \.self) { row in
-                    HStack(spacing: 15) {
-                        ForEach(row, id: \.self) { button in
-                            Button(action: {
-                                self.buttonTapped(button: button)
-                            }) {
-                                Text(button)
-                                    .font(.largeTitle)
-                                    .frame(width: 80, height: 80)
-                                    .background(selectedOperation == button ? Color.adaptiveButtonHighlight : Color.adaptiveButtonBackground)
-                                    .foregroundColor(Color.adaptiveText)
-                                    .cornerRadius(10)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                                    .scaleEffect(isPressed ? 1.1 : 1.0)
-                                    .animation(.easeInOut(duration: 0.1), value: isPressed)
-                                    .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0), value: isPressed)
+                Spacer()
+                
+                VStack(spacing: 10) {
+                    ForEach(buttonsArray, id: \.self) { row in
+                        HStack(spacing: 15) {
+                            ForEach(row, id: \.self) { button in
+                                Button(action: {
+                                    self.buttonTapped(button: button)
+                                }) {
+                                    Text(button)
+                                        .font(.largeTitle)
+                                        .frame(width: 80, height: 80)
+                                        .background(selectedOperation == button ? Color.adaptiveButtonHighlight : Color.adaptiveButtonBackground)
+                                        .foregroundColor(Color.adaptiveText)
+                                        .cornerRadius(10)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                                        .scaleEffect(isPressed ? 1.1 : 1.0)
+                                        .animation(.easeInOut(duration: 0.1), value: isPressed)
+                                        .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0), value: isPressed)
+                                }
+                                .gesture(
+                                    DragGesture(minimumDistance: 0)
+                                        .onChanged { _ in
+                                            isPressed = true
+                                        }
+                                        .onEnded { _ in
+                                            isPressed = false
+                                        }
+                                )
                             }
-                            .gesture(
-                                DragGesture(minimumDistance: 0)
-                                    .onChanged { _ in
-                                        isPressed = true
-                                    }
-                                    .onEnded { _ in
-                                        isPressed = false
-                                    }
-                            )
                         }
                     }
                 }
+                .padding()
+                .onAppear {
+                    loadSavedState()
+                }
             }
-            .padding()
-            .onAppear {
-                loadSavedState()
+            
+            if showCopyNotification {
+                Text("Скопировано!")
+                    .font(.headline)
+                    .padding()
+                    .background(Color.adaptiveButtonHighlight)
+                    .foregroundColor(Color.adaptiveText)
+                    .cornerRadius(10)
+                    .shadow(radius: 10)
+                    .transition(.opacity)
+                    .animation(.easeInOut(duration: 0.5))
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation {
+                                showCopyNotification = false
+                            }
+                        }
+                    }
             }
         }
     }
@@ -290,7 +316,6 @@ struct BasicCalculatorView: View {
             return String(result)
         }
     }
-
     
     func clear() {
         displayText = "0"
@@ -336,7 +361,6 @@ struct BasicCalculatorView: View {
             saveCurrentState()
         }
     }
-
     
     func saveCurrentState() {
         UserDefaults.standard.set(displayText, forKey: "displayText")
@@ -351,6 +375,19 @@ struct BasicCalculatorView: View {
     func generateHapticFeedback() {
         let impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .light)
         impactFeedbackgenerator.impactOccurred()
+    }
+    
+    func copyToClipboard() {
+        UIPasteboard.general.string = displayText
+        
+        notificationTimer?.invalidate()
+        showCopyNotification = true
+        
+        notificationTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { _ in
+            withAnimation {
+                showCopyNotification = false
+            }
+        }
     }
 }
 

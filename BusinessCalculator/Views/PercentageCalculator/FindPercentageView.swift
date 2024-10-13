@@ -111,7 +111,7 @@ struct FindPercentageView: View {
             result = "Error"
             return
         }
-        result = String((base * perc) / 100)
+        result = formatResult((base * perc) / 100)
         if saveState {
             saveValues()
         }
@@ -136,6 +136,18 @@ struct FindPercentageView: View {
         
         if saveState {
             saveValues()
+        }
+    }
+    
+    private func formatResult(_ result: Double) -> String {
+        if result.truncatingRemainder(dividingBy: 1) == 0 {
+            if result > Double(Int.max) {
+                return String(result)
+            } else {
+                return String(Int(result))
+            }
+        } else {
+            return String(result)
         }
     }
     
