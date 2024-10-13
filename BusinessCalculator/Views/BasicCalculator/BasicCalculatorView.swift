@@ -43,7 +43,7 @@ struct BasicCalculatorView: View {
             Text(displayText)
                 .font(.system(size: 70))
                 .padding()
-                .frame(maxWidth: .infinity, alignment: .trailing)
+                .frame(maxWidth: CGFloat.infinity, alignment: .trailing)
                 .cornerRadius(10)
                 .foregroundColor(Color.adaptiveText)
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
@@ -60,7 +60,7 @@ struct BasicCalculatorView: View {
                             }
                         }
                 )
-            
+
             Spacer()
             
             VStack(spacing: 10) {
@@ -169,6 +169,14 @@ struct BasicCalculatorView: View {
         }
 
         if operatorPressed {
+            currentOperation = operation
+            selectedOperation = operation
+            if customLogic {
+                if let lastChar = calculationChain.last, !lastChar.isNumber {
+                    calculationChain.removeLast(2)
+                    calculationChain += "\(operation) "
+                }
+            }
             return
         }
 
